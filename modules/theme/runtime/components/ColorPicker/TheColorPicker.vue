@@ -86,7 +86,7 @@ function toggleBookmark(label?: string) {
         </ColorBox>
       </ClosestColorName>
     </div>
-    <div class="mb-6 px-4">
+    <div class="mb-6 px-2">
       <TheInputSliders v-model="modelValue" />
     </div>
   </div>

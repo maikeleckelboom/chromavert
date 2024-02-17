@@ -65,10 +65,10 @@ whenever(logicAnd(container, hovered), () =>
       :ref="staticColorRefsList.set"
       :aria-label="staticColor.name"
       :class="{
-        'bg-surface-container outline-2 outline-surface-container':
+        'bg-surface-container outline-2 outline-surface':
           staticColor.value === Number(route.query.argb)
       }"
-      class="rounded border border-outline-variant"
+      class="rounded"
     >
       <div
         :style="{ backgroundColor: hexFromArgb(staticColor.value) }"
@@ -83,7 +83,7 @@ whenever(logicAnd(container, hovered), () =>
         <div class="sr-only">{{ staticColor.name }}</div>
       </div>
       <div
-        class="relative flex w-24 justify-between px-2 py-2 text-body-sm text-on-surface-variant"
+        class="relative flex w-24 justify-between px-2 pb-2 pt-3 text-body-sm text-on-surface-variant"
       >
         <span class="w-16 overflow-clip overflow-ellipsis whitespace-nowrap">
           {{ staticColor.name }}
