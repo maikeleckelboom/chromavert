@@ -64,13 +64,13 @@ const customHandle = ref<HTMLElement>()
 <template>
   <div class="flex flex-col gap-2">
     <div class="grid items-center gap-y-2">
-      <div class="flex items-center justify-between">
+      <div class="flex justify-between">
         <div class="flex flex-col">
-          <label class="flex flex-nowrap gap-x-2 text-label-md" for="hue">
+          <label class="flex flex-nowrap gap-x-2 pt-2 text-label-md" for="hue">
             Hue
             <Tooltip>
               <button>
-                <Icon class="h-4 w-4 text-on-surface-variant" name="ic:baseline-info" />
+                <Icon class="mb-0.5 ml-0.5 size-3 text-on-surface-variant" name="ic:baseline-info" />
               </button>
               <template #content> The type of color, such as red, blue, or green.</template>
             </Tooltip>
@@ -80,7 +80,7 @@ const customHandle = ref<HTMLElement>()
           id="hue"
           v-mask="{ min: 0, max: 360 }"
           :value="Math.round(formModel.hue)"
-          class="h-[34px] w-[52px] min-w-0 rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
+          class="h-10 w-16 min-w-0 rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
           inputmode="numeric"
           max="0"
           min="360"
@@ -98,13 +98,13 @@ const customHandle = ref<HTMLElement>()
       </InputRangeSlider>
     </div>
     <div class="grid items-center gap-y-2">
-      <div class="flex items-center justify-between">
+      <div class="flex justify-between">
         <div class="flex flex-col">
-          <label class="flex flex-nowrap gap-x-2 text-label-md" for="chroma">
+          <label class="flex flex-nowrap gap-x-2 pt-2 text-label-md" for="chroma">
             Chroma
             <Tooltip>
               <button>
-                <Icon class="h-4 w-4 text-on-surface-variant" name="ic:baseline-info" />
+                <Icon class="mb-0.5 ml-0.5 size-3 text-on-surface-variant" name="ic:baseline-info" />
               </button>
               <template #content> The intensity of a color, from gray to fully saturated.</template>
             </Tooltip>
@@ -114,7 +114,7 @@ const customHandle = ref<HTMLElement>()
           id="chroma"
           v-mask="{ min: 0, max: 150 }"
           :value="Math.round(formModel.chroma)"
-          class="h-[34px] w-[52px] rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
+          class="h-10 w-16 rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
           inputmode="numeric"
           type="text"
           @input="onTextUpdate($event, 'chroma')"
@@ -136,13 +136,13 @@ const customHandle = ref<HTMLElement>()
       </InputRangeSlider>
     </div>
     <div class="grid items-center gap-y-2">
-      <div class="flex items-center justify-between">
+      <div class="flex justify-between">
         <div class="flex flex-col">
-          <label class="flex flex-nowrap gap-x-2 text-label-md" for="tone">
+          <label class="flex flex-nowrap gap-x-2 pt-2 text-label-md" for="tone">
             Tone
             <Tooltip>
               <button>
-                <Icon class="h-4 w-4 text-on-surface-variant" name="ic:baseline-info" />
+                <Icon class="mb-0.5 ml-0.5 size-3 text-on-surface-variant" name="ic:baseline-info" />
               </button>
               <template #content> The amount of white or black mixed with the color.</template>
             </Tooltip>
@@ -152,7 +152,7 @@ const customHandle = ref<HTMLElement>()
           id="tone"
           v-mask="{ min: 0, max: 100 }"
           :value="Math.round(formModel.tone)"
-          class="h-[34px] w-[52px] rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
+          class="h-10 w-16 rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
           inputmode="numeric"
           type="text"
           @input="onTextUpdate($event, 'tone')"

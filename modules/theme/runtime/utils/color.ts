@@ -40,10 +40,10 @@ function groupByBaseColor(colors: Record<string, number>): Record<string, Record
   )
 }
 
-function groupSchemeByKeyAndPalette(scheme: DynamicScheme) {
-  return Object.keys(scheme).reduce(
+function groupDynamicScheme(dynamicScheme: DynamicScheme) {
+  return Object.keys(dynamicScheme).reduce(
     (acc, key) => {
-      const palette = scheme[key as keyof typeof scheme]
+      const palette = dynamicScheme[key as keyof typeof dynamicScheme]
       if (palette instanceof TonalPalette) {
         acc.push({
           key,
@@ -151,7 +151,7 @@ export {
   propertiesFromColors,
   textFromProperties,
   groupByBaseColor,
-  groupSchemeByKeyAndPalette,
+  groupDynamicScheme,
   repeatingLinearGradient,
   schemeVariants
 }

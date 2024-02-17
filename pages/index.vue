@@ -1,25 +1,14 @@
 <script lang="ts" setup>
 import OutlinedButton from '~/components/OutlinedButton.vue'
-import { hexFromArgb } from '@material/material-color-utilities'
-import MaxColorsInputSlider from '~/components/Input/MaxColorsInputSlider.vue'
+import { useDynamicScheme } from '~/modules/theme/runtime/composables/useDynamicScheme'
+import SourceColorPicker from '~/components/Input/SourceColorPicker.vue'
 
-const { $dynamicScheme } = useNuxtApp()
-
-const { sourceColor } = useThemeConfig()
-
-const dynamicSourceColor = computed({
-  get: () => $dynamicScheme.value.sourceColorArgb,
-  set: (value) => {
-    sourceColor.value = hexFromArgb(value)
-  }
-})
-
-const maxColors = ref(100)
+const dynamicScheme = useDynamicScheme()
 </script>
 
 <template>
   <header>
-    <div class="mx-auto flex w-full max-w-xl items-center justify-between">
+    <div class="mx-auto flex w-full max-w-4xl items-center justify-between">
       <div class="p-4">
         <NuxtLink v-slot="{ active }" to="/">
           <LogoBeeldmerk class="size-10" />
@@ -39,12 +28,16 @@ const maxColors = ref(100)
     </div>
   </header>
   <main class="flex flex-col">
-    <div class="mx-auto flex w-full max-w-xl flex-col">
+    <div class="mx-auto flex w-full max-w-4xl flex-col">
       <div class="p-4">
-        <h1>My Colors</h1>
+        <SourceColorPicker />
       </div>
       <div class="p-4">
-        <MaxColorsInputSlider v-model="maxColors" />
+        <h1>My Colors</h1>
+        <div class="grid grid-cols-2 gap-2"></div>
+      </div>
+      <div class="p-4">
+        <JsonPretty :data="dynamicScheme" />
       </div>
     </div>
   </main>

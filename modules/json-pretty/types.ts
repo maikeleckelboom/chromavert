@@ -2,7 +2,7 @@ import type { JSONDataType } from 'vue-json-pretty/types/utils'
 import type { NodeDataType } from 'vue-json-pretty/types/components/TreeNode'
 
 interface JsonPrettyProps {
-  data: JSONDataType
+  data: JSONDataType | undefined | any
   showLength: boolean
   showDoubleQuotes: boolean
   showSelectController: boolean

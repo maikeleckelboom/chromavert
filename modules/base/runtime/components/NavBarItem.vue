@@ -38,6 +38,7 @@ const isLarge = computed(() => props.item?.badge?.type === 'large')
   --_row-gap: 8px;
   --_margin-top: 12px;
   --_margin-bottom: 16px;
+
   display: grid;
   place-items: center;
   grid-template-columns: [icon state-indicator label badge] auto;

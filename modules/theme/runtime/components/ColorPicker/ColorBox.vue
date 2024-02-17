@@ -5,7 +5,9 @@ const modelValue = defineModel<number>('modelValue', { type: Number, default: 0 
 </script>
 
 <template>
-  <div :style="{ backgroundColor: hexFromArgb(modelValue) }" class="min-h-28 min-w-8 rounded"></div>
+  <div :style="{ backgroundColor: hexFromArgb(modelValue) }" class="min-h-28 min-w-8 rounded">
+    <slot />
+  </div>
 </template>
 
 <style scoped></style>
