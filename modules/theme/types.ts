@@ -20,16 +20,18 @@ const SCHEME_VARIANTS = {
 
 type Variant = keyof typeof SCHEME_VARIANTS
 
+type StaticColor = {
+  name: string
+  value: string
+  blend: boolean
+}
+
 interface ThemeModuleOptions {
-  isDark?: boolean
-  sourceColor?: string
-  contrastLevel?: number
-  variant?: Variant
-  staticColors?: {
-    name: string
-    value: string
-    blend?: boolean
-  }[]
+  isDark: boolean
+  sourceColor: string
+  contrastLevel: number
+  variant: Variant
+  staticColors: StaticColor[]
 }
 
 type ColorModeOption = {
@@ -37,8 +39,6 @@ type ColorModeOption = {
   value: string
   selected: boolean
 }
-
-type StaticColor = Pick<ThemeModuleOptions, 'staticColors'>['staticColors']
 
 export type { Variant, StaticColor, ThemeModuleOptions, ColorModeOption }
 export { SCHEME_VARIANTS }

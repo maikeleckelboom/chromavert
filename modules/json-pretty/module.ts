@@ -13,7 +13,6 @@ export default defineNuxtModule<ThemeModuleOptions>({
       'vue-json-pretty': '^2.1.0'
     }
   },
-  defaults: {},
   hooks: {},
   setup: async (options: ThemeModuleOptions, nuxt) => {
     nuxt.options.css = nuxt.options.css || []

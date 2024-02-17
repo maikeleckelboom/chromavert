@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     }
   },
 
-  css: ['~/assets/css/app.css'],
+  css: [],
 
   tailwindcss: {
     viewer: false,
@@ -44,9 +44,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/device',
     'nuxt-viewport',
-    '~/modules/theme/module.ts',
+    'nuxt-icon',
     '~/modules/json-pretty/module.ts',
-    'nuxt-icon'
+    '~/modules/tooltip/module.ts',
+    '~/modules/theme/module.ts'
   ],
 
   vueuse: {

@@ -3,6 +3,8 @@ import { Hct, hexFromArgb, TonalPalette } from '@material/material-color-utiliti
 import type { HctModel } from '~/modules/theme/types'
 import { vMask } from '~/utils/vMask'
 import { watchPausable } from '@vueuse/shared'
+import InputRangeSlider from '~/modules/slider/runtime/components/InputRangeSlider.vue'
+import SliderTrack from '~/modules/slider/runtime/components/SliderTrack.vue'
 
 const modelValue = defineModel<number>('modelValue', { type: Number, default: 0 })
 
@@ -50,7 +52,7 @@ watch(formModel, (v: HctModel) => {
   })
 })
 
-const { hue: hueSpectrum, chroma: chromaSpectrum, tone: toneSpectrum, bounds } = useHCTSpectra()
+const { hue: hueSpectrum, chroma: chromaSpectrum, tone: toneSpectrum, bounds } = useHctSpectra()
 
 function onTextUpdate(event: Event, key: keyof HctModel) {
   formModel[key] = parseInt((event.target as HTMLInputElement).value, 10)
@@ -78,7 +80,7 @@ const customHandle = ref<HTMLElement>()
           id="hue"
           v-mask="{ min: 0, max: 360 }"
           :value="Math.round(formModel.hue)"
-          class="h-[34px] w-[52px] min-w-0 rounded-lg bg-transparent px-3 py-2 text-center outline-none"
+          class="h-[34px] w-[52px] min-w-0 rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
           inputmode="numeric"
           max="0"
           min="360"
@@ -87,13 +89,7 @@ const customHandle = ref<HTMLElement>()
           @input="onTextUpdate($event, 'hue')"
         />
       </div>
-      <InputRangeSlider
-        v-model="formModel.hue"
-        class="color-input-slider"
-        contained="true"
-        max="360"
-        min="0"
-      >
+      <InputRangeSlider v-model="formModel.hue" class="color-input-slider" contained="true" max="360" min="0">
         <template #handle>
           <div ref="customHandle" class="custom-handle" />
         </template>
@@ -119,7 +115,7 @@ const customHandle = ref<HTMLElement>()
           id="chroma"
           v-mask="{ min: 0, max: 150 }"
           :value="Math.round(formModel.chroma)"
-          class="h-[34px] w-[52px] rounded-lg bg-transparent px-3 py-2 text-center outline-none"
+          class="h-[34px] w-[52px] rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
           inputmode="numeric"
           pattern="[0-9\s]{13,19}"
           type="text"
@@ -158,7 +154,7 @@ const customHandle = ref<HTMLElement>()
           id="tone"
           v-mask="{ min: 0, max: 100 }"
           :value="Math.round(formModel.tone)"
-          class="h-[34px] w-[52px] rounded-lg bg-transparent px-3 py-2 text-center outline-none"
+          class="h-[34px] w-[52px] rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
           inputmode="numeric"
           pattern="[0-9\s]{13,19}"
           type="text"

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { argbFromHex, argbFromRgba, hexFromArgb, rgbaFromArgb } from '@material/material-color-utilities'
-import { vMask } from '~/utils/directives/vMask'
+import { useMinMaxMask } from '~/composables/useMinMaxMask'
+import HctInputSliders from '~/modules/theme/runtime/components/ColorPicker/HctInputSliders.vue'
 
 defineProps<{ keyColor?: string }>()
 
@@ -35,6 +36,8 @@ const rgbaB = computed({
     modelValue.value = argbFromRgba({ ...rgba.value, b: v })
   }
 })
+
+const { vMask } = useMinMaxMask()
 </script>
 
 <template>
@@ -49,9 +52,9 @@ const rgbaB = computed({
           <fieldset class="relative">
             <input
               v-model="hex"
-              class="min-w-24 max-w-32 rounded-md border border-outline-variant bg-surface p-2 pr-10 text-body-lg uppercase tabular-nums outline-transparent md:max-w-[164px]"
+              class="min-w-24 max-w-32 rounded border border-outline-variant bg-surface p-2 pr-10 text-body-lg uppercase tabular-nums outline-transparent md:max-w-[164px]"
             />
-            <SaveToClipboard :source="hex" class="absolute right-0 top-1/2 -translate-y-1/2 p-3" />
+            <SaveToClipboard :source="hex" class="absolute right-0 top-1/2 hidden -translate-y-1/2 p-3" />
           </fieldset>
         </div>
         <div>
@@ -60,7 +63,7 @@ const rgbaB = computed({
             <input
               v-model="rgbaR"
               v-mask="{ min: 0, max: 255 }"
-              class="w-14 min-w-0 rounded-md border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
+              class="w-14 min-w-0 rounded border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
               inputmode="numeric"
               max="255"
               min="0"
@@ -69,7 +72,7 @@ const rgbaB = computed({
             <input
               v-model="rgbaG"
               v-mask="{ min: 0, max: 255 }"
-              class="w-14 min-w-0 rounded-md border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
+              class="w-14 min-w-0 rounded border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
               inputmode="numeric"
               max="255"
               min="0"
@@ -78,7 +81,7 @@ const rgbaB = computed({
             <input
               v-model="rgbaB"
               v-mask="{ min: 0, max: 255 }"
-              class="w-14 min-w-0 rounded-md border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
+              class="w-14 min-w-0 rounded border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
               inputmode="numeric"
               max="255"
               min="0"
@@ -101,6 +104,6 @@ const rgbaB = computed({
         </details>
       </div>
     </div>
-    <HctColorPicker v-model="modelValue" />
+    <HctInputSliders v-model="modelValue" />
   </div>
 </template>

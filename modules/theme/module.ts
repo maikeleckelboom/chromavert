@@ -37,8 +37,8 @@ export default defineNuxtModule<ThemeModuleOptions>({
     }
   },
   setup: async (options: ThemeModuleOptions, nuxt) => {
-    nuxt.options.appConfig.theme = defu(nuxt.options.appConfig?.theme || {}, options)
-    console.log('merged', nuxt.options.appConfig.theme)
+    // @ts-ignore
+    nuxt.options.appConfig.theme = defu(nuxt.options?.appConfig?.theme || {}, options)
 
     addPlugin({ src: resolve(`${runtimeDir}/plugin.ts`) })
     await addComponentsDir({
