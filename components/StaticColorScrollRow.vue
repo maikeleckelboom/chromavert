@@ -46,15 +46,30 @@ whenever(logicAnd(container, hovered), () =>
 
 <template>
   <ScrollRow>
-    <template v-for="staticColor in staticColors" :key="staticColor.id">
+    <div
+      v-for="staticColor in staticColors"
+      :key="staticColor.id"
+      class="rounded border border-outline-variant"
+    >
       <div
         :style="{ backgroundColor: hexFromArgb(staticColor.value) }"
-        class="aspect-square size-14 min-h-14 min-w-14 rounded-full"
+        class="relative h-20 min-w-24 overflow-hidden rounded"
         @click="onStaticColorClick(staticColor)"
       >
         <div class="sr-only">{{ staticColor.name }}</div>
       </div>
-    </template>
+      <div
+        class="relative flex w-24 justify-between px-2 py-2 text-body-sm text-on-surface-variant"
+      >
+        <span class="w-16 overflow-clip overflow-ellipsis whitespace-nowrap">
+          {{ staticColor.name }}
+        </span>
+        <!-- vert menu dot-->
+        <button class="absolute bottom-0 right-0 top-0 rounded bg-surface p-1">
+          <Icon class="size-6" name="ic:baseline-more-vert" />
+        </button>
+      </div>
+    </div>
   </ScrollRow>
 </template>
 

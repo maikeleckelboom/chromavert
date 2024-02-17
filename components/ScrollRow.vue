@@ -31,7 +31,7 @@ whenever(logicAnd(container, hovered), () =>
   <div class="max-w-svw relative overflow-clip">
     <div
       ref="container"
-      class="scrollbar scrollbar-stable flex w-full max-w-[calc(100svw-32px)] flex-nowrap gap-2 overflow-auto p-1 md:max-w-xl"
+      class="scrollbar scrollbar-stable flex w-full max-w-[calc(100svw-32px)] flex-nowrap gap-3 overflow-auto px-1 pb-2 pt-1 md:max-w-xl md:gap-4"
     >
       <slot />
     </div>

@@ -28,15 +28,33 @@ const dynamicScheme = useDynamicScheme()
       <div class="p-4"></div>
       <div class="p-4">
         <h1 class="mb-2">Static Colors</h1>
+        <p class="text-label-md text-on-surface-variant">
+          Save, edit, and share hand-picked colors across devices. Create schemes and harmonize
+          colors effortlessly for cohesive designs.
+        </p>
         <StaticColorScrollRow />
       </div>
       <div class="p-4">
         <h1 class="mb-2">Scheme Variant</h1>
+        <p class="text-label-md text-on-surface-variant">
+          Generate color schemes from your saved colors. Experiment with different variants to
+          harmonize colors for balanced designs in websites, presentations, or decor.
+        </p>
         <SchemeVariantScrollRow />
       </div>
       <div class="p-4">
         <h1 class="mb-2">Dynamic Scheme</h1>
         <JsonPretty :data="dynamicScheme" />
+      </div>
+
+      <div class="p-4">
+        <div class="mb-4">
+          <h2 class="text-title-lg">Create Schemes</h2>
+          <p class="text-label-md text-on-surface-variant">
+            Build beautiful palettes from your saved colors. Experiment with combinations for
+            balanced designs in websites, presentations, or decor.
+          </p>
+        </div>
       </div>
     </div>
   </main>

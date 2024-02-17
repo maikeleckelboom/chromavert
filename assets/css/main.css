@@ -9,16 +9,18 @@
 
     input[inputmode='numeric'],
     input[type='text'] {
-        @apply rounded-sm border border-transparent text-body-md tabular-nums bg-transparent outline-none focus:outline-secondary;
-        @apply min-h-[40px] min-w-12 px-2;
+        @apply rounded-sm border border-transparent text-body-md tabular-nums;
+        @apply bg-transparent outline-none focus:outline-secondary outline-offset-0;
+        @apply min-h-10 min-w-12 px-2;
     }
- 
+
     input[inputmode='numeric'] {
-        @apply min-h-8 text-center;
+        @apply min-h-8 text-center z-10;
     }
 
     input[type='text'].hex-input-field {
-        @apply h-[40px] w-fit border-transparent text-center text-headline-md font-bold uppercase bg-transparent focus:outline-none;
+        @apply h-[40px] w-fit border-transparent text-center text-headline-md font-bold uppercase bg-transparent;
+        @apply focus:outline-none;
     }
 }
 

@@ -65,7 +65,7 @@ function onInput(evt: Event) {
 <template>
   <fieldset
     ref="inputSetRef"
-    class="relative grid w-fit grid-flow-col grid-cols-[50px,50px,50px] rounded-sm border border-outline-variant p-1"
+    class="relative grid w-fit grid-flow-col grid-cols-[50px,50px,50px] rounded border border-outline-variant p-1"
   >
     <legend class="absolute -top-5 z-10 ml-1 rounded-sm bg-surface p-1 text-label-md">RGB</legend>
     <div class="flex flex-col gap-y-2">
