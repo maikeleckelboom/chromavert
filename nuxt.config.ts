@@ -27,6 +27,9 @@ export default defineNuxtConfig({
   appConfig: {
     theme: {
       isDark: true
+    },
+    nuxtIcon: {
+      size: '24px'
     }
   },
 
