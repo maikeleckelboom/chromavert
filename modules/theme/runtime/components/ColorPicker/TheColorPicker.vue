@@ -17,7 +17,9 @@ const hex = computed({
 })
 
 const contrastColorClass = computed(() => {
-  return chroma.contrast(hex.value, 'white') > 4.5 ? 'text-on-surface-dark' : 'text-on-surface-light'
+  return chroma.contrast(hex.value, 'white') > 4.5
+    ? 'text-on-surface-dark'
+    : 'text-on-surface-light'
 })
 
 const contrastVariantColorClass = computed(() => {
@@ -26,21 +28,20 @@ const contrastVariantColorClass = computed(() => {
     : 'text-on-surface-variant-light'
 })
 
-const closestNamedHex = computed(() => {
-  return chroma.valid(hex.value) ? chroma(hex.value).name() : ''
-})
-
 const onClickFullscreen = async () => {
-  console.log('onClickFullscreen')
-
-  // view transition
+  await navigateTo({
+    name: 'full-screen',
+    query: { argb: modelValue.value }
+  })
 }
 
 const store = useStaticColorStore()
 const { staticColors } = storeToRefs(store)
 
-function onSaveColor(value: number, name: string) {
-  store.addColor(value, name)
+function toggleBookmark(label?: string) {
+  store.hasColor(modelValue.value)
+    ? store.removeColor(modelValue.value)
+    : store.addColor(modelValue.value, label)
 }
 </script>
 
@@ -52,12 +53,12 @@ function onSaveColor(value: number, name: string) {
         :class="contrastColorClass"
         class="view-transition-color-box relative grid size-full min-h-40 place-items-center"
       >
-        <ClosestHTMLColorName v-slot="{ label }" v-model="modelValue">
+        <ClosestHTMLColorName v-slot="{ name, label }" v-model="modelValue">
           <fieldset class="m-auto flex flex-col place-items-center">
             <label class="sr-only" for="hex">Hex</label>
             <input id="hex" v-model="hex" class="hex-input-field" type="text" />
             <div :class="contrastVariantColorClass" class="leading-none tracking-normal">
-              <Icon class="size-3" name="mdi:tilde" />
+              <Icon class="mr-1 size-3" name="mdi:tilde" />
               <span class="text-body-sm">{{ label }}</span>
             </div>
           </fieldset>
@@ -65,10 +66,12 @@ function onSaveColor(value: number, name: string) {
           <button class="absolute bottom-0 left-0 z-10 p-4" @click="onClickFullscreen">
             <Icon class="size-6" name="ic:baseline-fullscreen" />
           </button>
-
-          <button class="absolute bottom-0 right-0 z-10 p-4" @click="onSaveColor(modelValue, label)">
-            <Icon class="size-6" name="ic:outline-bookmark-add" />
-          </button>
+          <div class="absolute bottom-0 right-0 z-10 p-4">
+            <button class="p-2" @click="toggleBookmark(label)">
+              <Icon v-if="store.hasColor(modelValue)" class="size-6" name="ic:baseline-bookmark" />
+              <Icon v-else class="size-6" name="ic:baseline-bookmark-border" />
+            </button>
+          </div>
         </ClosestHTMLColorName>
       </ColorBox>
     </div>

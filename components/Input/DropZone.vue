@@ -60,7 +60,7 @@ const id = useId()
     :class="[
       { 'bg-secondary-container/50': isOverDropZone },
       'flex',
-      'size-full',
+      'size-full-screen',
       'min-h-32',
       'cursor-pointer',
       'flex-col',
@@ -83,7 +83,13 @@ const id = useId()
       </span>
       <span class="text-xs leading-snug">PNG, JPG, SVG or WEBP</span>
     </span>
-    <input :id="`dropzone-file-${id}`" accept="image/*" class="hidden" type="file" @change="onChange" />
+    <input
+      :id="`dropzone-file-${id}`"
+      accept="image/*"
+      class="hidden"
+      type="file"
+      @change="onChange"
+    />
   </label>
 </template>
 

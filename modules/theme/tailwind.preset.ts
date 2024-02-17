@@ -29,7 +29,7 @@ export const materialThemePreset = {
   content: [],
   darkMode: 'class',
   corePlugins: {
-    aspectRatio: false
+    aspectRatio: true
   },
 
   plugins: [
