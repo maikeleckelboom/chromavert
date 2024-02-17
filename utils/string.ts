@@ -38,7 +38,11 @@ function sentenceCase(str: string): string {
 }
 
 function titleCase(str: string): string {
-  return sentenceCase(str).replace(/^[a-z]/, (g) => g[0].toUpperCase())
+  return sentenceCase(str)
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+    .trimStart()
 }
 
 export {

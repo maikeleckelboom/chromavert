@@ -40,7 +40,7 @@ function getClosestNamedColor() {
 const namedColor = computed(getClosestNamedColor)
 const category = computed(() => namedColor.value?.category ?? '')
 const name = computed(() => namedColor.value?.name ?? '')
-const label = computed(() => sentenceCase(name.value))
+const label = computed(() => titleCase(name.value))
 
 defineSlots<{
   default: (props: { category: string; name: string; label: string }) => VNode
@@ -48,7 +48,7 @@ defineSlots<{
 </script>
 
 <template>
-  <slot v-bind="{ category, name, label }"></slot>
+  <slot v-bind="{ category, name, label }" />
 </template>
 
 <style scoped></style>

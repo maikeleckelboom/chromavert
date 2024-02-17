@@ -8,7 +8,7 @@ const dynamicScheme = useDynamicScheme()
 
 <template>
   <header>
-    <div class="mx-auto flex w-full max-w-4xl items-center justify-between">
+    <div class="mx-auto flex w-full max-w-xl items-center justify-between">
       <div class="p-4">
         <NuxtLink v-slot="{ active }" to="/">
           <LogoBeeldmerk class="size-10" />
@@ -28,7 +28,7 @@ const dynamicScheme = useDynamicScheme()
     </div>
   </header>
   <main class="flex flex-col">
-    <div class="mx-auto flex w-full max-w-4xl flex-col">
+    <div class="mx-auto flex w-full max-w-xl flex-col">
       <div class="p-4">
         <SourceColorPicker />
       </div>

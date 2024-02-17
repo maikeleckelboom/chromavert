@@ -22,8 +22,14 @@ type Variant = keyof typeof SCHEME_VARIANTS
 
 type StaticColor = {
   name: string
-  value: string
+  value: number
   blend: boolean
+}
+
+type CustomColor = {
+  name: string
+  value: string
+  blend?: boolean
 }
 
 interface ThemeModuleOptions {
@@ -31,7 +37,7 @@ interface ThemeModuleOptions {
   sourceColor: string
   contrastLevel: number
   variant: Variant
-  staticColors: StaticColor[]
+  staticColors: CustomColor[]
 }
 
 type ColorModeOption = {
@@ -40,7 +46,7 @@ type ColorModeOption = {
   selected: boolean
 }
 
-export type { Variant, StaticColor, ThemeModuleOptions, ColorModeOption }
+export type { Variant, StaticColor, CustomColor, ThemeModuleOptions, ColorModeOption }
 export { SCHEME_VARIANTS }
 
 type HctModel = {
