@@ -53,11 +53,6 @@ whenever(inputSetRef, (el) =>
     })
   )
 )
-
-function cycleColorSpace() {
-  //
-  console.log('cycleColorSpace')
-}
 </script>
 
 <template>

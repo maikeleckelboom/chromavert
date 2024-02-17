@@ -2,8 +2,10 @@
 import type { SliderProps } from '~/modules/slider/types'
 import { type Position, useTemplateRefsList } from '@vueuse/core'
 import type { Ref } from 'vue'
-import type { SliderHandle } from '#components'
-import { isArray } from '@vue/shared'
+import SliderTrackFill from '~/modules/slider/runtime/components/SliderTrackFill.vue'
+import SliderHandle from '~/modules/slider/runtime/components/SliderHandle.vue'
+import SliderLabelContainer from '~/modules/slider/runtime/components/future/SliderLabelContainer.vue'
+import SliderTrack from '~/modules/slider/runtime/components/SliderTrack.vue'
 
 const props = withDefaults(defineProps<SliderProps>(), {
   min: 0,
@@ -70,11 +72,7 @@ function getToReversed() {
   return isHorizontalAndRtl || isVerticalAndBtt
 }
 
-function calculateProgress(
-  parentRect: DOMRect,
-  endPos: Position,
-  offsetPos: Position = { x: 0, y: 0 }
-) {
+function calculateProgress(parentRect: DOMRect, endPos: Position, offsetPos: Position = { x: 0, y: 0 }) {
   const isV = unref(isVertical)
   const horizontal = isV ? 'top' : 'left'
   const vertical = isV ? 'bottom' : 'right'
@@ -110,9 +108,7 @@ function getClickedPointer(evt: PointerEvent) {
 }
 
 function getDistanceToCenter(rect: DOMRect, { x, y }: Position) {
-  const center = unref(isVertical)
-    ? rect.top + rect.height / 2
-    : rect.left + rect.width / 2
+  const center = unref(isVertical) ? rect.top + rect.height / 2 : rect.left + rect.width / 2
   return unref(isVertical) ? y - center : x - center
 }
 

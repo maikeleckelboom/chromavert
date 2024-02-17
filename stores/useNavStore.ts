@@ -7,11 +7,6 @@ const useNavStore = defineStore('nav', () => {
       path: '/',
       icon: ['ic:outline-home-max', 'ic:baseline-home-max']
     },
-    /*{
-      label: 'Favorites',
-      path: '/favorites',
-      icon: ['ic:baseline-favorite-border', 'ic:baseline-favorite']
-    },*/
     {
       label: 'Colors',
       path: '/colors',
@@ -39,9 +34,7 @@ const useNavStore = defineStore('nav', () => {
 
   const router = useRouter()
 
-  const exactActive = computed(() =>
-    state.value.find((item) => item.path === router.currentRoute.value.path)
-  )
+  const exactActive = computed(() => state.value.find((item) => item.path === router.currentRoute.value.path))
 
   const active = computed(() =>
     state.value.find((item) => router.currentRoute.value.path.startsWith(item.path))
@@ -51,9 +44,7 @@ const useNavStore = defineStore('nav', () => {
 
   const possibleBackgroundTokens = ['bg-surface', 'bg-surface-container', 'bg-surface-variant'] as const
   const backgroundToken = ref<(typeof possibleBackgroundTokens)[number]>('bg-surface')
-  const textToken = computed(() =>
-    ['text', 'on', ...backgroundToken.value.split('-').slice(1)].join('-')
-  )
+  const textToken = computed(() => ['text', 'on', ...backgroundToken.value.split('-').slice(1)].join('-'))
 
   function toggleLabeled() {
     isLabeled.value = !isLabeled.value

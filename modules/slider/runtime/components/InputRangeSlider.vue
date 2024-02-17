@@ -41,6 +41,7 @@ const isBtt = computed(() => {
 const isVertical = computed(() => props.orientation === 'vertical')
 const isContained = computed(() => isTruthy(props.contained))
 const isDisabled = computed(() => isTruthy(props.disabled))
+const isOversized = computed(() => isTruthy(props.oversized))
 
 const modelValue = defineModel<number | number[]>()
 
@@ -254,16 +255,13 @@ const STATE_CLASSES = {
 const stateClasses = computed(() => {
   return {
     [STATE_CLASSES.swiping]: isSwiping.value,
-    [STATE_CLASSES.disabled]: isDisabled.value
+    [STATE_CLASSES.disabled]: isDisabled.value,
+    [STATE_CLASSES.enabled]: !isDisabled.value
   }
 })
 
-const isOversized = computed(() => isTruthy(props.oversized))
-
 const variantClasses = computed(() => {
   const map = {
-    [STATE_CLASSES.enabled]: !isDisabled.value,
-    [STATE_CLASSES.disabled]: isDisabled.value,
     [VARIANT_CLASSES.horizontal]: !isVertical.value,
     [VARIANT_CLASSES.vertical]: isVertical.value,
     [VARIANT_CLASSES.contained]: isContained.value,
@@ -315,6 +313,9 @@ const styleBinding = computed(() => {
         v-for="(progress, index) in modelValueProgress"
         :key="index"
         :ref="handlesRef.set"
+        :aria-valuemax="max"
+        :aria-valuemin="min"
+        :aria-valuenow="getValue(progress)"
         :inert="isDisabled"
         :style="{ '--_offset': `${progress}%` }"
         class="slider-handle"

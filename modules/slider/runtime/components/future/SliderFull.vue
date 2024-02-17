@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import SliderWrapper from '~/modules/slider/runtime/components/SliderWrapper.vue'
-import SliderRoot from '~/modules/slider/runtime/components/SliderRoot.vue'
+import SliderWrapper from '~/modules/slider/runtime/components/future/SliderWrapper.vue'
+import SliderRoot from '~/modules/slider/runtime/components/future/SliderRoot.vue'
 
 defineSlots<{
   default: void

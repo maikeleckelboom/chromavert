@@ -84,7 +84,6 @@ const customHandle = ref<HTMLElement>()
           inputmode="numeric"
           max="0"
           min="360"
-          pattern="[0-9\s]{13,19}"
           type="text"
           @input="onTextUpdate($event, 'hue')"
         />
@@ -117,7 +116,6 @@ const customHandle = ref<HTMLElement>()
           :value="Math.round(formModel.chroma)"
           class="h-[34px] w-[52px] rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
           inputmode="numeric"
-          pattern="[0-9\s]{13,19}"
           type="text"
           @input="onTextUpdate($event, 'chroma')"
         />
@@ -156,7 +154,6 @@ const customHandle = ref<HTMLElement>()
           :value="Math.round(formModel.tone)"
           class="h-[34px] w-[52px] rounded bg-transparent px-3 py-2 text-center outline-outline-variant"
           inputmode="numeric"
-          pattern="[0-9\s]{13,19}"
           type="text"
           @input="onTextUpdate($event, 'tone')"
         />

@@ -14,8 +14,6 @@ export default defineNuxtModule<ModuleOptions>({
   },
   defaults: {},
   setup: async (options: ModuleOptions, nuxt) => {
-    nuxt.options.css = nuxt.options.css || []
-    // nuxt.options.css.push(resolve(`${runtimeDir}/css/index.css`))
     await addComponentsDir({
       path: resolve(`${runtimeDir}/components`)
     })
@@ -24,7 +22,7 @@ export default defineNuxtModule<ModuleOptions>({
     extendPages((pages) => {
       pages.push({
         name: 'slider',
-        path: '/modules/slider',
+        path: '/slider',
         file: resolve('./runtime/pages/index.vue')
       })
     })
