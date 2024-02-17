@@ -3,7 +3,7 @@ const dynamicScheme = useDynamicScheme()
 </script>
 
 <template>
-  <header>
+  <header class="absolute left-0 right-0 top-0 h-16 bg-surface">
     <div class="mx-auto flex w-full max-w-xl items-center justify-between">
       <div class="p-4">
         <NuxtLink to="/">
@@ -23,16 +23,17 @@ const dynamicScheme = useDynamicScheme()
       </div>
     </div>
   </header>
-  <main class="flex flex-col">
-    <div class="mx-auto flex w-full max-w-xl flex-col">
-      <div class="p-4"></div>
+  <main class="flex flex-col pt-16">
+    <div class="mx-auto flex w-full max-w-xl flex-col gap-8">
       <div class="p-4">
         <h1 class="mb-2">Static Colors</h1>
         <p class="text-label-md text-on-surface-variant">
           Save, edit, and share hand-picked colors across devices. Create schemes and harmonize
           colors effortlessly for cohesive designs.
         </p>
-        <StaticColorScrollRow />
+        <div class="mt-2">
+          <StaticColorScrollRow />
+        </div>
       </div>
       <div class="p-4">
         <h1 class="mb-2">Scheme Variant</h1>
@@ -40,7 +41,9 @@ const dynamicScheme = useDynamicScheme()
           Generate color schemes from your saved colors. Experiment with different variants to
           harmonize colors for balanced designs in websites, presentations, or decor.
         </p>
-        <SchemeVariantScrollRow />
+        <div class="mt-2">
+          <SchemeVariantScrollRow />
+        </div>
       </div>
       <div class="p-4">
         <h1 class="mb-2">Dynamic Scheme</h1>

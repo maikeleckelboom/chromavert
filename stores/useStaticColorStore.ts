@@ -20,7 +20,7 @@ export const useStaticColorStore = defineStore(
       if (someColorHasSameName(name)) {
         name = `${name} ${incWhenSameName(name)}`
       }
-      staticColors.value = [...staticColors.value, { id: slugify(name), value, name, blend }]
+      staticColors.value = [{ id: slugify(name), value, name, blend }, ...staticColors.value]
     }
 
     function removeColor(idOrValue: string | number) {

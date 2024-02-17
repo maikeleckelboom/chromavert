@@ -6,8 +6,13 @@ import ScrollRow from '~/components/ScrollRow.vue'
 
 const store = useStaticColorStore()
 const { staticColors } = storeToRefs(store)
+const route = useRoute()
+const containerRef = ref<InstanceType<typeof ScrollRow>>()
 
-async function onStaticColorClick(staticColor: StaticColorWithId) {
+const staticColorRefsList = useTemplateRefsList<HTMLElement>()
+
+async function onStaticColorClick(staticColor: StaticColorWithId, index: number) {
+  containerRef.value?.scrollToIndex(index)
   await navigateTo({
     path: `/color-picker`,
     query: {
@@ -45,17 +50,28 @@ whenever(logicAnd(container, hovered), () =>
 </script>
 
 <template>
-  <ScrollRow>
+  <ScrollRow ref="containerRef">
     <div
-      v-for="staticColor in staticColors"
+      v-for="(staticColor, i) in staticColors"
       :key="staticColor.id"
+      :ref="staticColorRefsList.set"
+      :aria-label="staticColor.name"
+      :class="{
+        'bg-surface-container outline-2 outline-surface-container':
+          staticColor.value === Number(route.query.argb)
+      }"
       class="rounded border border-outline-variant"
     >
       <div
         :style="{ backgroundColor: hexFromArgb(staticColor.value) }"
-        class="relative h-20 min-w-24 overflow-hidden rounded"
-        @click="onStaticColorClick(staticColor)"
+        class="relative grid h-20 min-w-24 place-items-center overflow-hidden rounded"
+        @click="onStaticColorClick(staticColor, i)"
       >
+        <Icon
+          v-if="staticColor.value === Number(route.query.argb)"
+          class="size-6"
+          name="ic:baseline-check"
+        />
         <div class="sr-only">{{ staticColor.name }}</div>
       </div>
       <div
@@ -65,7 +81,7 @@ whenever(logicAnd(container, hovered), () =>
           {{ staticColor.name }}
         </span>
         <!-- vert menu dot-->
-        <button class="absolute bottom-0 right-0 top-0 rounded bg-surface p-1">
+        <button class="absolute bottom-0 right-0 top-0 rounded p-1">
           <Icon class="size-6" name="ic:baseline-more-vert" />
         </button>
       </div>
