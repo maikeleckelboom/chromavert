@@ -47,10 +47,31 @@ whenever(inputSetRef, (el) =>
 </script>
 
 <template>
-  <fieldset ref="inputSetRef" class="grid grid-cols-5 gap-x-1">
-    <input v-model="rgbaR" v-mask="{ min: 0, max: 255 }" inputmode="numeric" max="255" min="0" type="text" />
-    <input v-model="rgbaG" v-mask="{ min: 0, max: 255 }" inputmode="numeric" max="255" min="0" type="text" />
-    <input v-model="rgbaB" v-mask="{ min: 0, max: 255 }" inputmode="numeric" max="255" min="0" type="text" />
+  <fieldset ref="inputSetRef" class="grid w-fit grid-cols-3 gap-x-1">
+    <input
+      v-model="rgbaR"
+      v-mask="{ min: 0, max: 255 }"
+      inputmode="numeric"
+      max="255"
+      min="0"
+      type="text"
+    />
+    <input
+      v-model="rgbaG"
+      v-mask="{ min: 0, max: 255 }"
+      inputmode="numeric"
+      max="255"
+      min="0"
+      type="text"
+    />
+    <input
+      v-model="rgbaB"
+      v-mask="{ min: 0, max: 255 }"
+      inputmode="numeric"
+      max="255"
+      min="0"
+      type="text"
+    />
   </fieldset>
 </template>
 

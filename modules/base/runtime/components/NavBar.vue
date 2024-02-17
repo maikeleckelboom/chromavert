@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import type { NavBarItem as TNavBarItem } from '~/modules/base/types'
 import NavBarItem from '~/modules/base/runtime/components/NavBarItem.vue'
 
-const props = withDefaults(defineProps<{ items?: TNavBarItem[] }>(), { items: () => [] })
-
-const itemsCount = computed(() => props.items.length)
+const store = useNavStore()
+const { state } = storeToRefs(store)
+const itemsCount = computed(() => state.value.length)
 
 const { isLabeled } = storeToRefs(useNavStore())
 </script>
@@ -12,7 +11,7 @@ const { isLabeled } = storeToRefs(useNavStore())
 <template>
   <div class="v-nav-bar">
     <div class="v-nav-bar-container">
-      <NavBarItem v-for="item in items" :key="item.label" :item="item" :labeled="isLabeled" />
+      <NavBarItem v-for="item in state" :key="item.label" :item="item" :labeled="isLabeled" />
     </div>
   </div>
 </template>

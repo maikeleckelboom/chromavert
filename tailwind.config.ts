@@ -9,6 +9,7 @@ const config = {
     `${srcDir}/modules/**/runtime/components/**/*.vue`,
     `${srcDir}/modules/**/runtime/pages/**/*.vue`
   ],
+  safelist: [' /^text-/'],
   plugins: [],
   presets: [materialThemePreset]
 } satisfies Config

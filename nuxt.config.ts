@@ -31,7 +31,7 @@ export default defineNuxtConfig({
       staticColors: [
         {
           name: 'Success',
-          value: '#3dee67',
+          value: '#48b763',
           blend: true
         }
       ]

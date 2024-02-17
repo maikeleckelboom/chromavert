@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { hexFromArgb } from '@material/material-color-utilities'
 
 definePageMeta({
   title: 'Full Screen Color',
@@ -20,10 +19,6 @@ async function onExitFullScreen() {
 }
 
 whenever(Escape, onExitFullScreen)
-
-const backgroundColor = computed(() => {
-  return hexFromArgb(parseInt(route.query.argb as string, 10))
-})
 
 const store = useStaticColorStore()
 </script>

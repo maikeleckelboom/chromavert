@@ -13,7 +13,7 @@ const { data, pending, error } = await useAsyncData(
     <div v-if="pending">Loading...</div>
     <div v-else-if="error">Error: {{ error }}</div>
     <div v-else>
-      <StaticColorCollection />
+      <StaticColorScrollRow />
     </div>
   </div>
 </template>

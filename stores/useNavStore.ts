@@ -8,8 +8,8 @@ const useNavStore = defineStore('nav', () => {
       icon: ['ic:outline-home-max', 'ic:baseline-home-max']
     },
     {
-      label: 'Colors',
-      path: '/colors',
+      label: 'Static Colors',
+      path: '/static-color',
       icon: ['ic:baseline-colorize', 'ic:baseline-colorize']
     },
     {
@@ -20,21 +20,14 @@ const useNavStore = defineStore('nav', () => {
         label: 'new',
         type: 'large'
       }
-    },
-    {
-      label: 'Settings',
-      path: '/settings',
-      icon: ['ic:outline-settings', 'ic:baseline-settings'],
-      badge: {
-        label: 1,
-        type: 'small'
-      }
     }
   ])
 
   const router = useRouter()
 
-  const exactActive = computed(() => state.value.find((item) => item.path === router.currentRoute.value.path))
+  const exactActive = computed(() =>
+    state.value.find((item) => item.path === router.currentRoute.value.path)
+  )
 
   const active = computed(() =>
     state.value.find((item) => router.currentRoute.value.path.startsWith(item.path))
@@ -42,9 +35,15 @@ const useNavStore = defineStore('nav', () => {
 
   const isLabeled = ref<boolean>(true)
 
-  const possibleBackgroundTokens = ['bg-surface', 'bg-surface-container', 'bg-surface-variant'] as const
+  const possibleBackgroundTokens = [
+    'bg-surface',
+    'bg-surface-container',
+    'bg-surface-variant'
+  ] as const
   const backgroundToken = ref<(typeof possibleBackgroundTokens)[number]>('bg-surface')
-  const textToken = computed(() => ['text', 'on', ...backgroundToken.value.split('-').slice(1)].join('-'))
+  const textToken = computed(() =>
+    ['text', 'on', ...backgroundToken.value.split('-').slice(1)].join('-')
+  )
 
   function toggleLabeled() {
     isLabeled.value = !isLabeled.value
