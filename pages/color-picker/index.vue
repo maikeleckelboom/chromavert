@@ -10,11 +10,15 @@ definePageMeta({
     }
   }
 })
+
+const modelValue = ref(Number(route.query.argb))
 </script>
 
 <template>
-  <div>
-    {{ route.params.argb }}
+  <div class="mx-auto w-full max-w-lg">
+    <div class="p-4">
+      <TheColorPicker v-model="modelValue" />
+    </div>
   </div>
 </template>
 

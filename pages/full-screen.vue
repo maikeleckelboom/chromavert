@@ -27,11 +27,10 @@ const contrastVariantColorClass = computed(() => getContrastHexClass(hex.value, 
 
 <template>
   <div
-    :class="contrastColorClass"
     :style="{ backgroundColor: hex }"
     class="view-transition-color-box fixed inset-0 z-[51] size-full h-svh w-svw object-cover"
   >
-    <button class="p-2" @click="onExitFullScreen">
+    <button :class="contrastColorClass" class="p-6" @click="onExitFullScreen">
       <Icon class="size-8" name="ic:baseline-fullscreen-exit" />
     </button>
   </div>

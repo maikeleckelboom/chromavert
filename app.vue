@@ -22,18 +22,4 @@ useHead({
   <NavBar />
 </template>
 
-<style lang="postcss">
-input[inputmode='numeric'],
-input[type='text'] {
-  @apply rounded border border-transparent bg-surface-container/50 text-body-md tabular-nums outline-secondary;
-  @apply min-w-12 p-2;
-}
-
-input[inputmode='numeric'] {
-  @apply text-center;
-}
-
-input[type='text'].hex-input-field {
-  @apply h-[40px] w-fit border-transparent bg-transparent text-center text-headline-md font-bold uppercase outline-none focus:outline-none;
-}
-</style>
+<style lang="postcss"></style>

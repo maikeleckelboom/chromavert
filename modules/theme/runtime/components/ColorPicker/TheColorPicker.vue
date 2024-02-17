@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { argbFromHex, hexFromArgb } from '@material/material-color-utilities'
 import { useStaticColorStore } from '~/stores/useStaticColorStore'
-import { getContrastHexClass } from '~/modules/theme/runtime/utils'
+import chroma from 'chroma-js'
 
 defineProps<{ keyColor?: string }>()
 
@@ -14,8 +14,9 @@ const hex = computed({
   }
 })
 
-const contrastColorClass = computed(() => getContrastHexClass(hex.value))
-const contrastVariantColorClass = computed(() => getContrastHexClass(hex.value, true))
+function isContrastDark(hex: string) {
+  return chroma(hex).luminance() < 0.4
+}
 
 const route = useRoute()
 
@@ -40,23 +41,29 @@ function toggleBookmark(label?: string) {
 </script>
 
 <template>
-  <div class="grid gap-y-8">
-    <div class="grid grid-cols-1 gap-2">
+  <div ref="root" class="grid">
+    <div class="mb-8 grid grid-cols-1 gap-2">
       <ClosestColorName v-slot="{ label }" v-model="modelValue">
         <ColorBox
           v-model="modelValue"
+          :style="{
+            color: isContrastDark(hex)
+              ? 'rgb(var(--on-surface-dark-rgb))'
+              : 'rgb(var(--on-surface-light-rgb))'
+          }"
           class="view-transition-color-box relative grid size-full min-h-40 place-items-center overflow-hidden"
         >
           <fieldset class="m-auto flex flex-col place-items-center">
             <label class="sr-only" for="hex">Hex</label>
-            <input
-              id="hex"
-              v-model="hex"
-              :class="contrastColorClass"
-              class="hex-input-field"
-              type="text"
-            />
-            <div :class="contrastVariantColorClass" class="leading-none tracking-normal">
+            <input id="hex" v-model="hex" class="hex-input-field" type="text" />
+            <div
+              :style="{
+                color: isContrastDark(hex)
+                  ? 'rgb(var(--on-surface-variant-dark-rgb))'
+                  : 'rgb(var(--on-surface-variant-light-rgb))'
+              }"
+              class="leading-none tracking-normal"
+            >
               <Icon class="mr-1 size-3" name="mdi:tilde" />
               <span class="text-body-sm">{{ label }}</span>
             </div>
@@ -78,6 +85,9 @@ function toggleBookmark(label?: string) {
           </div>
         </ColorBox>
       </ClosestColorName>
+    </div>
+    <div class="mb-6 flex justify-end">
+      <InputRgb v-model="modelValue" />
     </div>
     <TheInputSliders v-model="modelValue" />
   </div>

@@ -23,7 +23,7 @@ const { min, max } = useSteps(props)
   <input
     v-model="modelValue"
     v-mask="{ min, max }"
-    class="h-[38px] w-[48px] rounded-lg border-thin border-outline-variant bg-transparent text-center outline-none"
+    class="h-[38px] w-[48px] rounded-sm border-thin border-outline-variant bg-transparent text-center outline-none"
     inputmode="numeric"
     pattern="[0-9\s]{13,19}"
     type="text"
