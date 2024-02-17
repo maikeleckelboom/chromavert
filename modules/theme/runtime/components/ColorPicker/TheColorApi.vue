@@ -69,9 +69,7 @@ const filteredData = computed(() => {
   <div class="relative flex h-[238px] w-full flex-col">
     <div v-if="error" class="text-error">{{ error }}</div>
     <Transition v-else mode="out-in" name="fade">
-      <div v-if="isLoading" class="grid size-full place-items-center">
-        <Spinner />
-      </div>
+      <div v-if="isLoading" class="grid size-full place-items-center">Loading ..</div>
       <div
         v-else-if="filteredData"
         :class="labels ? 'grid-cols-[48px,1fr]' : 'grid-cols-1'"

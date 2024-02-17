@@ -37,13 +37,15 @@ const dynamicSourceColor = computed({
     <div class="mx-auto flex w-full max-w-xl flex-col">
       <!-- -->
       <div class="p-4">
-        <KeyColorSettings v-model="dynamicSourceColor" />
+        <TheColorPicker v-model="dynamicSourceColor" />
       </div>
 
       <!-- -->
 
       <div class="p-4">
-        <JsonPretty :data="$dynamicScheme" />
+        <ClientOnly>
+          <JsonPretty :data="$dynamicScheme" />
+        </ClientOnly>
       </div>
     </div>
   </main>

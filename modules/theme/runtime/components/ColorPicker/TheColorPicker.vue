@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { argbFromHex, argbFromRgba, hexFromArgb, rgbaFromArgb } from '@material/material-color-utilities'
-import { useMinMaxMask } from '~/composables/useMinMaxMask'
-import HctInputSliders from '~/modules/theme/runtime/components/ColorPicker/HctInputSliders.vue'
+import { vMask } from '~/utils/vMask'
 
 defineProps<{ keyColor?: string }>()
 
@@ -37,33 +36,53 @@ const rgbaB = computed({
   }
 })
 
-const { vMask } = useMinMaxMask()
+const inputSetRef = ref<HTMLElement>()
+
+whenever(inputSetRef, (el) =>
+  el.querySelectorAll('input').forEach((input) =>
+    useEventListener(input, 'paste', (evt) => {
+      evt.preventDefault()
+      const clipboardData = evt.clipboardData
+      if (!clipboardData) return
+      const pastedData = clipboardData.getData('text')
+      const pastedDataArray = pastedData.split(/,|\s/)
+      if (pastedDataArray.length === 3) {
+        const [r, g, b] = pastedDataArray.map((v) => parseInt(v, 10))
+        modelValue.value = argbFromRgba({ ...rgba.value, r, g, b })
+      }
+    })
+  )
+)
+
+function cycleColorSpace() {
+  //
+  console.log('cycleColorSpace')
+}
 </script>
 
 <template>
   <div class="grid">
-    <div class="mb-8 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-[1fr,auto]">
+    <div class="mb-8 grid grid-cols-1 gap-x-4 gap-y-4 md:grid-cols-[1fr,1fr]">
       <div>
-        <ColorPreview :color="modelValue" class="size-full min-h-40" />
+        <ColorBox v-model="modelValue" class="size-full min-h-40" />
       </div>
-      <div class="grid grid-cols-[auto,1fr] gap-x-4 gap-y-3 md:grid-cols-1">
+      <div class="grid gap-x-4 gap-y-3">
         <div>
           <label class="mb-1.5 flex text-label-md">Hex</label>
-          <fieldset class="relative">
+          <fieldset>
             <input
               v-model="hex"
-              class="min-w-24 max-w-32 rounded border border-outline-variant bg-surface p-2 pr-10 text-body-lg uppercase tabular-nums outline-transparent md:max-w-[164px]"
+              class="w-full rounded border border-outline-variant bg-surface p-2 pr-10 text-body-lg uppercase tabular-nums outline-transparent"
             />
-            <SaveToClipboard :source="hex" class="absolute right-0 top-1/2 hidden -translate-y-1/2 p-3" />
           </fieldset>
         </div>
         <div>
           <label class="mb-1.5 flex text-label-md">RGB</label>
-          <fieldset class="flex gap-2">
+          <fieldset ref="inputSetRef" class="grid grid-cols-5 gap-2">
             <input
               v-model="rgbaR"
               v-mask="{ min: 0, max: 255 }"
-              class="w-14 min-w-0 rounded border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
+              class="min-w-12 rounded border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
               inputmode="numeric"
               max="255"
               min="0"
@@ -72,7 +91,7 @@ const { vMask } = useMinMaxMask()
             <input
               v-model="rgbaG"
               v-mask="{ min: 0, max: 255 }"
-              class="w-14 min-w-0 rounded border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
+              class="min-w-12 rounded border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
               inputmode="numeric"
               max="255"
               min="0"
@@ -81,7 +100,7 @@ const { vMask } = useMinMaxMask()
             <input
               v-model="rgbaB"
               v-mask="{ min: 0, max: 255 }"
-              class="w-14 min-w-0 rounded border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
+              class="min-w-12 rounded border border-outline-variant bg-surface p-2 text-center text-body-lg tabular-nums outline-transparent"
               inputmode="numeric"
               max="255"
               min="0"
@@ -104,6 +123,6 @@ const { vMask } = useMinMaxMask()
         </details>
       </div>
     </div>
-    <HctInputSliders v-model="modelValue" />
+    <TheInputSliders v-model="modelValue" />
   </div>
 </template>
