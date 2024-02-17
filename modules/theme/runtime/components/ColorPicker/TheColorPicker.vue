@@ -68,15 +68,15 @@ function toggleBookmark(label?: string) {
               <span class="text-body-sm">{{ label }}</span>
             </div>
           </fieldset>
-          <div class="absolute bottom-0 left-0 z-10 p-4">
-            <button class="p-2" title="Go to full-screen" @click="onClickFullscreen">
+          <div class="absolute bottom-0 left-0 z-10">
+            <button class="p-4" title="Go to full-screen" @click="onClickFullscreen">
               <Icon class="size-6" name="ic:baseline-fullscreen" />
             </button>
           </div>
-          <div class="absolute bottom-0 right-0 z-10 p-4">
+          <div class="absolute bottom-0 right-0 z-10">
             <button
               :title="store.hasColor(modelValue) ? 'Remove Bookmark' : 'Bookmark'"
-              class="p-2"
+              class="p-4"
               @click="toggleBookmark(label)"
             >
               <Icon v-if="store.hasColor(modelValue)" class="size-6" name="ic:baseline-bookmark" />
@@ -86,7 +86,7 @@ function toggleBookmark(label?: string) {
         </ColorBox>
       </ClosestColorName>
     </div>
-    <div class="mb-6">
+    <div class="mb-6 px-4">
       <TheInputSliders v-model="modelValue" />
     </div>
   </div>

@@ -11,6 +11,14 @@ const containerRef = ref<InstanceType<typeof ScrollRow>>()
 
 const staticColorRefsList = useTemplateRefsList<HTMLElement>()
 
+onMounted(() => {
+  const argb = Number(route.query.argb)
+  const index = staticColors.value.findIndex((color) => color.value === argb)
+  if (index !== -1) {
+    containerRef.value?.scrollToIndex(index)
+  }
+})
+
 async function onStaticColorClick(staticColor: StaticColorWithId, index: number) {
   containerRef.value?.scrollToIndex(index)
   await navigateTo({

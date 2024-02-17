@@ -23,12 +23,11 @@ watch(
 
 <template>
   <div class="mx-auto w-full max-w-lg">
-    <div class="p-4">
+    <div class="">
       <TheColorPicker v-model="modelValue" />
     </div>
 
-    <div class="mt-8 p-4">
-      <h2 class="m-1 text-title-lg">Static Colors</h2>
+    <div class="mt-8">
       <StaticColorScrollRow />
     </div>
   </div>
