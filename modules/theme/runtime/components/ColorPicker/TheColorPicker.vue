@@ -2,7 +2,6 @@
 import { argbFromHex, hexFromArgb } from '@material/material-color-utilities'
 import chroma from 'chroma-js'
 import ClosestHTMLColorName from '~/components/ClosestHTMLColorName.vue'
-import StaticColorCollection from '~/components/StaticColorCollection.vue'
 import { useStaticColorStore } from '~/stores/useStaticColorStore'
 
 defineProps<{ keyColor?: string }>()
@@ -28,10 +27,15 @@ const contrastVariantColorClass = computed(() => {
     : 'text-on-surface-variant-light'
 })
 
+const route = useRoute()
+
 const onClickFullscreen = async () => {
   await navigateTo({
-    name: 'full-screen',
-    query: { argb: modelValue.value }
+    path: `/full-screen`,
+    query: {
+      previousRoute: route.fullPath,
+      argb: unref(modelValue.value)
+    }
   })
 }
 
@@ -51,9 +55,9 @@ function toggleBookmark(label?: string) {
       <ColorBox
         v-model="modelValue"
         :class="contrastColorClass"
-        class="view-transition-color-box relative grid size-full min-h-40 place-items-center"
+        class="view-transition-color-box relative grid size-full min-h-40 place-items-center overflow-hidden"
       >
-        <ClosestHTMLColorName v-slot="{ name, label }" v-model="modelValue">
+        <ClosestHTMLColorName v-slot="{ label }" v-model="modelValue">
           <fieldset class="m-auto flex flex-col place-items-center">
             <label class="sr-only" for="hex">Hex</label>
             <input id="hex" v-model="hex" class="hex-input-field" type="text" />
@@ -62,12 +66,17 @@ function toggleBookmark(label?: string) {
               <span class="text-body-sm">{{ label }}</span>
             </div>
           </fieldset>
-
-          <button class="absolute bottom-0 left-0 z-10 p-4" @click="onClickFullscreen">
-            <Icon class="size-6" name="ic:baseline-fullscreen" />
-          </button>
+          <div class="absolute bottom-0 left-0 z-10 p-4">
+            <button class="p-2" title="Go to full-screen" @click="onClickFullscreen">
+              <Icon class="size-6" name="ic:baseline-fullscreen" />
+            </button>
+          </div>
           <div class="absolute bottom-0 right-0 z-10 p-4">
-            <button class="p-2" @click="toggleBookmark(label)">
+            <button
+              :title="store.hasColor(modelValue) ? 'Remove Bookmark' : 'Bookmark'"
+              class="p-2"
+              @click="toggleBookmark(label)"
+            >
               <Icon v-if="store.hasColor(modelValue)" class="size-6" name="ic:baseline-bookmark" />
               <Icon v-else class="size-6" name="ic:baseline-bookmark-border" />
             </button>
@@ -76,7 +85,6 @@ function toggleBookmark(label?: string) {
       </ColorBox>
     </div>
     <TheInputSliders v-model="modelValue" />
-    <StaticColorCollection />
   </div>
 </template>
 
@@ -85,17 +93,13 @@ function toggleBookmark(label?: string) {
   view-transition-name: color-box;
 }
 
-input[inputmode='numeric'],
-input[type='text'] {
-  @apply rounded border border-transparent bg-surface-container text-body-lg tabular-nums outline-secondary;
-  @apply min-w-12 p-2;
+::view-transition-old(color-box) {
 }
 
-input[inputmode='numeric'] {
-  @apply text-center;
+::view-transition-new(color-box) {
 }
 
-input[type='text'].hex-input-field {
-  @apply h-[40px] w-fit border-transparent bg-transparent text-center text-headline-md font-bold uppercase outline-none focus:outline-none;
+::view-transition-old(color-box),
+::view-transition-new(color-box) {
 }
 </style>

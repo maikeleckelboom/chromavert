@@ -26,14 +26,22 @@ export default defineNuxtConfig({
 
   appConfig: {
     theme: {
-      isDark: true
+      isDark: true,
+      variant: 'content',
+      staticColors: [
+        {
+          name: 'Success',
+          value: '#3dee67',
+          blend: true
+        }
+      ]
     },
     nuxtIcon: {
       size: '24px'
     }
   },
 
-  css: [],
+  css: ['~/assets/css/main.css', '~/assets/css/tailwind.css'],
 
   tailwindcss: {
     viewer: false,
@@ -50,7 +58,8 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '~/modules/json-pretty/module.ts',
     '~/modules/tooltip/module.ts',
-    '~/modules/theme/module.ts'
+    '~/modules/theme/module.ts',
+    '@pinia-plugin-persistedstate/nuxt'
   ],
 
   vueuse: {

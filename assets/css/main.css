@@ -1,6 +1,9 @@
+@tailwind base;
+@tailwind utilities;
+
 @layer base {
     body {
-        @apply scrollbar;
+        @apply scrollbar scrollbar-stable;
     }
 }
 

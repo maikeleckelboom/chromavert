@@ -1,5 +1,13 @@
 <script lang="ts" setup>
-import { arrow, autoUpdate, flip, offset, type Placement, shift, useFloating } from '@floating-ui/vue'
+import {
+  arrow,
+  autoUpdate,
+  flip,
+  offset,
+  type Placement,
+  shift,
+  useFloating
+} from '@floating-ui/vue'
 
 interface Props {
   placement?: Placement
@@ -53,7 +61,7 @@ function hide() {
 }
 
 onClickOutside(floating, () => {
-  hide()
+  open.value = false
 })
 
 const arrowPos = computed(() => ({

@@ -33,8 +33,9 @@ const dynamicScheme = useDynamicScheme()
         <SourceColorPicker />
       </div>
       <div class="p-4">
-        <h1>My Colors</h1>
+        <h1 class="mb-2">Static Colors</h1>
         <div class="grid grid-cols-2 gap-2"></div>
+        <StaticColorCollection />
       </div>
       <div class="p-4">
         <JsonPretty :data="dynamicScheme" />

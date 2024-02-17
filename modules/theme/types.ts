@@ -46,7 +46,16 @@ type ColorModeOption = {
   selected: boolean
 }
 
-export type { Variant, StaticColor, CustomColor, ThemeModuleOptions, ColorModeOption }
+type StaticColorWithId = StaticColor & { id: string }
+
+export type {
+  Variant,
+  StaticColor,
+  CustomColor,
+  StaticColorWithId,
+  ThemeModuleOptions,
+  ColorModeOption
+}
 export { SCHEME_VARIANTS }
 
 type HctModel = {

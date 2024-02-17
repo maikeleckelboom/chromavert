@@ -14,7 +14,16 @@ type NamedColor = {
   b: number
 }
 
-type ColorName = 'red' | 'pink' | 'orange' | 'yellow' | 'purple' | 'green' | 'blue' | 'brown' | 'white'
+type ColorName =
+  | 'red'
+  | 'pink'
+  | 'orange'
+  | 'yellow'
+  | 'purple'
+  | 'green'
+  | 'blue'
+  | 'brown'
+  | 'white'
 
 type FlatNamedColor = NamedColor & { category: ColorName }
 
