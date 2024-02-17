@@ -66,10 +66,9 @@ whenever(logicAnd(container, hovered), () =>
 watch(
   staticColors,
   (newValue, oldValue) => {
-    const diff = newValue.length - oldValue.length
-    if (diff > 0) {
-      containerRef.value?.scrollToIndex(newValue.length - 1)
-    }
+    const [newColor] = newValue
+    route.query.argb = newColor.value.toString()
+    containerRef.value?.scrollToIndex(0)
   },
   { deep: true }
 )
