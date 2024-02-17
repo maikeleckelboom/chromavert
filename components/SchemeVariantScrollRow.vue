@@ -27,7 +27,7 @@ function setVariant(v: Variant) {
         :id="variant.id"
         :aria-label="variant.text"
         :aria-pressed="variant.active"
-        :class="variant.active ? 'border-primary' : 'border-outline-variant'"
+        :class="variant.active ? 'border-primary' : 'border-outline'"
         class="grid place-items-center rounded border-px px-3 py-2 outline-offset-2"
         @click="setVariant(variant.value)"
       >

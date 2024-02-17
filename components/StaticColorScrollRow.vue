@@ -20,13 +20,20 @@ onMounted(() => {
 })
 
 async function onStaticColorClick(staticColor: StaticColorWithId, index: number) {
-  containerRef.value?.scrollToIndex(index)
+  if (route.fullPath.endsWith('/color-picker')) {
+    console.log('onStaticColorClick', staticColor, index)
+    return
+  }
   await navigateTo({
     path: `/color-picker`,
     query: {
       argb: staticColor.value.toString()
     }
   })
+}
+
+async function openContextMenu(staticColor: StaticColorWithId, index: number) {
+  console.log('openContextMenu', staticColor, index)
 }
 
 const container = ref<HTMLDivElement>()
@@ -55,6 +62,17 @@ whenever(logicAnd(container, hovered), () =>
     { passive: false }
   )
 )
+
+watch(
+  staticColors,
+  (newValue, oldValue) => {
+    const diff = newValue.length - oldValue.length
+    if (diff > 0) {
+      containerRef.value?.scrollToIndex(newValue.length - 1)
+    }
+  },
+  { deep: true }
+)
 </script>
 
 <template>
@@ -63,7 +81,6 @@ whenever(logicAnd(container, hovered), () =>
       v-for="(staticColor, i) in staticColors"
       :key="staticColor.id"
       :ref="staticColorRefsList.set"
-      :aria-label="staticColor.name"
       :class="{
         'bg-surface-container outline-2 outline-surface':
           staticColor.value === Number(route.query.argb)
@@ -83,13 +100,15 @@ whenever(logicAnd(container, hovered), () =>
         <div class="sr-only">{{ staticColor.name }}</div>
       </div>
       <div
-        class="relative flex w-24 justify-between px-2 pb-2 pt-3 text-body-sm text-on-surface-variant"
+        class="relative flex w-24 justify-between px-1 pt-2 text-body-sm text-on-surface-variant"
       >
         <span class="w-16 overflow-clip overflow-ellipsis whitespace-nowrap">
           {{ staticColor.name }}
         </span>
-        <!-- vert menu dot-->
-        <button class="absolute bottom-0 right-0 top-0 rounded p-1">
+        <button
+          class="absolute bottom-0 right-0 top-0 rounded"
+          @click="openContextMenu(staticColor, i)"
+        >
           <Icon class="size-6" name="ic:baseline-more-vert" />
         </button>
       </div>

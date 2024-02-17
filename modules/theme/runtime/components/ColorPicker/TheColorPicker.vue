@@ -33,7 +33,7 @@ const onClickFullscreen = async () => {
 const store = useStaticColorStore()
 const { staticColors } = storeToRefs(store)
 
-function toggleBookmark(label?: string) {
+function toggleSafeColor(label?: string) {
   store.hasColor(modelValue.value)
     ? store.removeColor(modelValue.value)
     : store.addColor(modelValue.value, label)
@@ -77,7 +77,7 @@ function toggleBookmark(label?: string) {
             <button
               :title="store.hasColor(modelValue) ? 'Remove Bookmark' : 'Bookmark'"
               class="p-4"
-              @click="toggleBookmark(label)"
+              @click="toggleSafeColor(label)"
             >
               <Icon v-if="store.hasColor(modelValue)" class="size-6" name="ic:baseline-bookmark" />
               <Icon v-else class="size-6" name="ic:baseline-bookmark-border" />

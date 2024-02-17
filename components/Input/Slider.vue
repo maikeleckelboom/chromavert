@@ -3,14 +3,41 @@ import type { SliderMark, SliderProps } from '~/modules/slider/types'
 import InputSliderTicks from '~/modules/slider/runtime/components/SliderTicks.vue'
 import InputRangeSlider from '~/modules/slider/runtime/components/InputRangeSlider.vue'
 
-const props = withDefaults(defineProps<SliderProps & { numberOfTicks?: number }>(), {
-  numberOfTicks: 2,
+interface Props extends SliderProps {
+  numberOfTicks?: number | 'step'
+}
+
+const props = withDefaults(defineProps<Props>(), {
   min: 0,
   max: 100,
   oversized: true
 })
 
-const { numberOfTicks } = toRefs(props)
+function autoCalcStep(min: number, max: number) {
+  const range = max - min
+  return range / 100
+}
+
+function useNumOfTicks(options: Props) {
+  const numberOfTicks = ref<number>(2)
+  watch(
+    () => options.numberOfTicks,
+    (value) => {
+      if (value === 'step') {
+        numberOfTicks.value = Math.ceil(
+          (Number(props.max) - Number(props.min)) /
+            autoCalcStep(Number(props.min), Number(props.max))
+        )
+      } else {
+        numberOfTicks.value = value as number
+      }
+    },
+    { immediate: true }
+  )
+  return { numberOfTicks }
+}
+
+const { numberOfTicks } = useNumOfTicks(props)
 
 const modelValue = defineModel<number | number[]>({
   type: [Number, Array],
@@ -24,7 +51,12 @@ type LabelGenerateOptions = {
   decimalPlaces: number
 }
 
-function generateLabelsFromNumber({ min, max, count, decimalPlaces }: LabelGenerateOptions): SliderMark[] {
+function generateLabelsFromNumber({
+  min,
+  max,
+  count,
+  decimalPlaces
+}: LabelGenerateOptions): SliderMark[] {
   const valueRange = max - min
   let spacing = valueRange / count
   let actualNumberOfLabels = Math.ceil(valueRange / spacing)
