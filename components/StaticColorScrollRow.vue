@@ -102,7 +102,7 @@ watch(
         <div class="sr-only">{{ staticColor.name }}</div>
       </div>
       <div
-        class="relative flex w-28 justify-between px-1 pb-2 pt-2 text-body-sm text-on-surface-variant"
+        class="relative flex w-28 justify-between pb-2 pl-1 pt-2 text-body-sm text-on-surface-variant"
       >
         <span class="w-20 overflow-clip overflow-ellipsis whitespace-nowrap leading-none">
           {{ staticColor.name }}
@@ -111,7 +111,7 @@ watch(
           class="absolute bottom-0 right-0 top-0 rounded"
           @click="openContextMenu(staticColor, i)"
         >
-          <Icon class="size-6" name="ic:baseline-more-vert" />
+          <Icon class="size-5" name="ic:baseline-more-vert" />
         </button>
       </div>
     </div>
