@@ -2,14 +2,15 @@
 import { useStaticColorStore } from '~/stores/useStaticColorStore'
 import { hexFromArgb } from '@material/material-color-utilities'
 import type { StaticColorWithId } from '~/modules/theme/types'
-import ScrollRow from '~/components/ScrollRow.vue'
+import type { ScrollRowContainer } from '#components'
 
 const store = useStaticColorStore()
 const { staticColors } = storeToRefs(store)
-const route = useRoute()
-const containerRef = ref<InstanceType<typeof ScrollRow>>()
 
+const containerRef = ref<InstanceType<typeof ScrollRowContainer>>()
 const staticColorRefsList = useTemplateRefsList<HTMLElement>()
+
+const route = useRoute()
 
 onMounted(() => {
   const argb = Number(route.query.argb)
@@ -18,23 +19,6 @@ onMounted(() => {
     containerRef.value?.scrollToIndex(index)
   }
 })
-
-async function onStaticColorClick(staticColor: StaticColorWithId, index: number) {
-  if (route.fullPath.endsWith('/color-picker')) {
-    console.log('onStaticColorClick', staticColor, index)
-    return
-  }
-  await navigateTo({
-    path: `/color-picker`,
-    query: {
-      argb: staticColor.value.toString()
-    }
-  })
-}
-
-async function openContextMenu(staticColor: StaticColorWithId, index: number) {
-  console.log('openContextMenu', staticColor, index)
-}
 
 const container = ref<HTMLDivElement>()
 const hovered = useElementHover(container)
@@ -65,20 +49,36 @@ whenever(logicAnd(container, hovered), () =>
 
 watch(
   staticColors,
-  (newValue) => {
-    const [newColor] = newValue
+  (newColors) => {
+    const [newColor] = newColors
     route.query.argb = newColor.value.toString()
     nextTick(() => {
-      const index = newValue.findIndex((color) => color.value === Number(route.query.argb))
+      const index = newColors.findIndex((color) => color.value === Number(route.query.argb))
       containerRef.value?.scrollToIndex(index)
     })
   },
   { deep: true }
 )
+
+async function onStaticColorClick(staticColor: StaticColorWithId, index: number) {
+  if (route.fullPath.endsWith('/color-picker')) {
+    return
+  }
+  await navigateTo({
+    path: `/color-picker`,
+    query: {
+      argb: staticColor.value.toString()
+    }
+  })
+}
+
+async function openContextMenu(staticColor: StaticColorWithId, index: number) {
+  console.log('openContextMenu', staticColor, index)
+}
 </script>
 
 <template>
-  <ScrollRow ref="containerRef">
+  <ScrollRowContainer ref="containerRef">
     <div
       v-for="(staticColor, i) in staticColors"
       :key="staticColor.id"
@@ -115,7 +115,7 @@ watch(
         </button>
       </div>
     </div>
-  </ScrollRow>
+  </ScrollRowContainer>
 </template>
 
 <style scoped></style>

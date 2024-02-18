@@ -28,7 +28,7 @@ watch(
     </div>
 
     <div class="mt-8">
-      <StaticColorScrollRow />
+      <ScrollRowStaticColors />
     </div>
   </div>
 </template>

@@ -15,7 +15,7 @@ const hex = computed({
 })
 
 function isContrastDark(hex: string) {
-  return chroma(hex).luminance() < 0.4
+  return chroma(hex).luminance() < 0.45
 }
 
 const route = useRoute()
@@ -101,15 +101,5 @@ const isSavedColor = computed(() => store.hasColor(modelValue.value))
 <style lang="postcss">
 .view-transition-color-box {
   view-transition-name: color-box;
-}
-
-::view-transition-old(color-box) {
-}
-
-::view-transition-new(color-box) {
-}
-
-::view-transition-old(color-box),
-::view-transition-new(color-box) {
 }
 </style>

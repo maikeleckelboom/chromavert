@@ -59,6 +59,9 @@ function generateLabelsFromNumber({
 }: LabelGenerateOptions): SliderMark[] {
   const valueRange = max - min
   let spacing = valueRange / count
+  if (spacing === 0) {
+    spacing = 1
+  }
   let actualNumberOfLabels = Math.ceil(valueRange / spacing)
   const labels: SliderMark[] = []
   for (let i = 0; i <= actualNumberOfLabels; i++) {

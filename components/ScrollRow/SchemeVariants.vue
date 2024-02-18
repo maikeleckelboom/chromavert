@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Variant } from '~/modules/theme/types'
-import type { ScrollRow } from '#components'
+import type { ScrollRowContainer } from '#components'
 
 const { variant } = useThemeConfig()
 
@@ -13,7 +13,7 @@ const variants = computed(() =>
   }))
 )
 
-const containerRef = ref<InstanceType<typeof ScrollRow>>()
+const containerRef = ref<InstanceType<typeof ScrollRowContainer>>()
 
 function setVariant(v: Variant) {
   variant.value = v
@@ -21,7 +21,7 @@ function setVariant(v: Variant) {
 </script>
 
 <template>
-  <ScrollRow ref="containerRef">
+  <ScrollRowContainer ref="containerRef">
     <template v-for="variant in variants" :key="variant.id">
       <button
         :id="variant.id"
@@ -39,7 +39,7 @@ function setVariant(v: Variant) {
         </span>
       </button>
     </template>
-  </ScrollRow>
+  </ScrollRowContainer>
 </template>
 
 <style scoped></style>

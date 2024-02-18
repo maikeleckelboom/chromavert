@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import SliderField from '~/components/Input/SliderField.vue'
-
 const dynamicScheme = useDynamicScheme()
 
 const { contrastLevel } = useThemeConfig()
@@ -39,7 +37,7 @@ const maxColors = ref<number>(100)
         </p>
       </div>
       <div class="mb-4">
-        <StaticColorScrollRow />
+        <ScrollRowStaticColors />
       </div>
       <div class="mb-4 p-2">
         <h1 class="mb-2">Scheme Variant</h1>
@@ -48,7 +46,7 @@ const maxColors = ref<number>(100)
           harmonize colors for balanced designs in websites, presentations, or decor.
         </p>
         <div class="mt-2 pt-2">
-          <SchemeVariantScrollRow />
+          <ScrollRowSchemeVariants />
         </div>
       </div>
 
@@ -60,7 +58,7 @@ const maxColors = ref<number>(100)
         <InputMaxColors v-model="maxColors" />
       </div>
       <div class="p-2">
-        <SliderField
+        <InputSliderField
           v-model="contrastLevel"
           :number-of-ticks="2"
           contained="true"
@@ -77,7 +75,7 @@ const maxColors = ref<number>(100)
               </template>
             </Tooltip>
           </template>
-        </SliderField>
+        </InputSliderField>
       </div>
     </div>
   </main>
