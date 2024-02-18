@@ -53,7 +53,7 @@ defineExpose({
   <div class="max-w-svw relative overflow-clip">
     <div
       ref="container"
-      class="scrollbar scrollbar-stable max-w-svw flex w-full flex-nowrap gap-2 overflow-auto p-1 md:max-w-xl"
+      class="scrollbar scrollbar-stable max-w-svw flex w-full flex-nowrap gap-2 overflow-auto px-1 pb-2 md:max-w-xl md:pb-0"
     >
       <slot />
     </div>

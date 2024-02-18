@@ -15,12 +15,12 @@
     }
 
     input[inputmode='numeric'] {
-        @apply min-h-8 text-center z-10;
+        @apply min-h-8 z-10;
     }
 
     input[type='text'].hex-input-field {
-        @apply h-[40px] w-fit border-transparent text-center text-headline-md font-bold uppercase bg-transparent;
-        @apply focus:outline-none;
+        @apply h-[40px] w-fit border-transparent text-headline-md font-bold uppercase bg-transparent;
+        @apply focus:outline-none text-center;
     }
 }
 

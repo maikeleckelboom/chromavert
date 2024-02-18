@@ -6,8 +6,6 @@ const { resolve } = createResolver(import.meta.url)
 
 const runtimeDir = './runtime' as const
 
-const sourceColor = '#149FD8' as const
-
 export default defineNuxtModule<ThemeModuleOptions>({
   meta: {
     name: 'theme',
@@ -19,7 +17,7 @@ export default defineNuxtModule<ThemeModuleOptions>({
     }
   },
   defaults: {
-    sourceColor,
+    sourceColor: '#149FD8',
     isDark: false,
     variant: 'content',
     contrastLevel: 0.35,

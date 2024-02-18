@@ -38,6 +38,11 @@ function toggleSafeColor(label?: string) {
     ? store.removeColor(modelValue.value)
     : store.addColor(modelValue.value, label)
 }
+
+const btn = ref<HTMLButtonElement>()
+const hovering = useElementHover(btn)
+
+const isSavedColor = computed(() => store.hasColor(modelValue.value))
 </script>
 
 <template>
@@ -73,14 +78,15 @@ function toggleSafeColor(label?: string) {
               <Icon class="size-6" name="ic:baseline-fullscreen" />
             </button>
           </div>
-          <div class="absolute bottom-0 right-0 z-10">
+          <div class="absolute bottom-1 right-1 z-10">
             <button
-              :title="store.hasColor(modelValue) ? 'Remove Bookmark' : 'Bookmark'"
-              class="p-4"
+              ref="btn"
+              :title="isSavedColor ? 'Un-like' : 'Like'"
+              class="rounded-full bg-transparent p-3"
               @click="toggleSafeColor(label)"
             >
-              <Icon v-if="store.hasColor(modelValue)" class="size-6" name="ic:baseline-bookmark" />
-              <Icon v-else class="size-6" name="ic:baseline-bookmark-border" />
+              <Icon v-if="isSavedColor" class="size-6" name="ic:baseline-favorite" />
+              <Icon v-else class="size-6" name="ic:baseline-favorite-border" />
             </button>
           </div>
         </ColorBox>

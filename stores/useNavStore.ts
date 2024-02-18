@@ -8,10 +8,15 @@ const useNavStore = defineStore('nav', () => {
       icon: ['ic:outline-home-max', 'ic:baseline-home-max']
     },
     {
-      label: 'Static Colors',
-      path: '/static-color',
-      icon: ['ic:baseline-colorize', 'ic:baseline-colorize']
+      label: 'Themes',
+      path: '/themes',
+      icon: ['ic:baseline-invert-colors', 'ic:baseline-invert-colors']
     },
+    // {
+    //   label: 'Static Colors',
+    //   path: '/static-color',
+    //   icon: ['ic:baseline-colorize', 'ic:baseline-colorize']
+    // },
     {
       label: 'Quantize',
       path: '/quantize',

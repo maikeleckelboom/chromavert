@@ -65,10 +65,13 @@ whenever(logicAnd(container, hovered), () =>
 
 watch(
   staticColors,
-  (newValue, oldValue) => {
+  (newValue) => {
     const [newColor] = newValue
     route.query.argb = newColor.value.toString()
-    containerRef.value?.scrollToIndex(0)
+    nextTick(() => {
+      const index = newValue.findIndex((color) => color.value === Number(route.query.argb))
+      containerRef.value?.scrollToIndex(index)
+    })
   },
   { deep: true }
 )
@@ -81,14 +84,14 @@ watch(
       :key="staticColor.id"
       :ref="staticColorRefsList.set"
       :class="{
-        'bg-surface-container outline-2 outline-surface':
+        'border-surface-container bg-surface-container':
           staticColor.value === Number(route.query.argb)
       }"
       class="rounded"
     >
       <div
         :style="{ backgroundColor: hexFromArgb(staticColor.value) }"
-        class="relative grid h-20 min-w-24 place-items-center overflow-hidden rounded"
+        class="min-w-26 relative grid h-20 place-items-center overflow-hidden rounded"
         @click="onStaticColorClick(staticColor, i)"
       >
         <Icon
@@ -99,9 +102,9 @@ watch(
         <div class="sr-only">{{ staticColor.name }}</div>
       </div>
       <div
-        class="relative flex w-24 justify-between px-1 pt-2 text-body-sm text-on-surface-variant"
+        class="relative flex w-28 justify-between px-1 pb-2 pt-2 text-body-sm text-on-surface-variant"
       >
-        <span class="w-16 overflow-clip overflow-ellipsis whitespace-nowrap">
+        <span class="w-20 overflow-clip overflow-ellipsis whitespace-nowrap leading-none">
           {{ staticColor.name }}
         </span>
         <button

@@ -50,7 +50,7 @@ const { contrastLevel } = useThemeConfig()
       </div>
       <div class="p-2">
         <h1 class="mb-2">Dynamic Scheme</h1>
-        <JsonPretty :data="dynamicScheme" />
+        <JsonPretty :data="dynamicScheme" :deep="3" />
       </div>
 
       <div class="p-2">
