@@ -5,7 +5,11 @@ type StaticColorWithId = { id: string } & StaticColor
 export const useStaticColorStore = defineStore(
   'staticColor',
   () => {
-    const staticColors = shallowRef<StaticColorWithId[]>([])
+    const staticColors = shallowRef<StaticColorWithId[]>([
+      { id: 'red', value: 0xff0000, name: 'red', blend: false },
+      { id: 'green', value: 0x00ff00, name: 'green', blend: false },
+      { id: 'blue', value: 0x0000ff, name: 'blue', blend: false }
+    ])
 
     function someColorHasSameName(name: string) {
       return staticColors.value.some((color) => color.name === name)

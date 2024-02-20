@@ -56,7 +56,7 @@ const isSavedColor = computed(() => store.hasColor(modelValue.value))
               ? 'rgb(var(--on-surface-dark-rgb))'
               : 'rgb(var(--on-surface-light-rgb))'
           }"
-          class="view-transition-color-box relative grid size-full min-h-40 place-items-center overflow-hidden"
+          class="view-transition-color-box relative grid size-full min-h-52 place-items-center overflow-hidden"
         >
           <fieldset class="m-auto flex flex-col place-items-center">
             <label class="sr-only" for="hex">Hex</label>

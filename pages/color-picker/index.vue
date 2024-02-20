@@ -19,13 +19,17 @@ watch(
     modelValue.value = Number(route.query.argb)
   }
 )
+
+const { Escape } = useMagicKeys()
+
+whenever(Escape, () => {
+  navigateTo({ path: '/' })
+})
 </script>
 
 <template>
   <div class="mx-auto w-full max-w-lg">
-    <div class="">
-      <TheColorPicker v-model="modelValue" />
-    </div>
+    <TheColorPicker v-model="modelValue" />
 
     <div class="mt-8">
       <ScrollRowStaticColors />

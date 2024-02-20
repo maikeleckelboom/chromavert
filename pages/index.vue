@@ -41,13 +41,21 @@ const maxColors = ref<number>(100)
       </div>
       <div class="mb-4 p-2">
         <h1 class="mb-2">Scheme Variant</h1>
-        <p class="text-label-md text-on-surface-variant">
-          Generate color schemes from your saved colors. Experiment with different variants to
-          harmonize colors for balanced designs in websites, presentations, or decor.
-        </p>
+        <p class="text-label-md text-on-surface-variant"></p>
         <div class="mt-2 pt-2">
           <ScrollRowSchemeVariants />
         </div>
+      </div>
+
+      <div class="mt-8">
+        <Tooltip>
+          <template #trigger>
+            <OutlinedButton>Open Trigger</OutlinedButton>
+          </template>
+          <div class="p-4">
+            <p class="text-lg">This is a tooltip</p>
+          </div>
+        </Tooltip>
       </div>
 
       <!--      <div class="p-2">-->
